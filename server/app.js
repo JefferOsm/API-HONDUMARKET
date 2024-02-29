@@ -8,7 +8,7 @@ const app = express();
 
 //midlewares
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin:'https://hondumarke.netlify.app',
     credentials: true
 }));
 app.use(express.urlencoded({extended: true}));

@@ -65,8 +65,8 @@ export const createUser = async (req, res) => {
 
     const token= await createToken({id: rows.insertId});
     res.cookie('token', token,{
-      SameSite:'None',
-      Secure:true
+      sameSite:'none',
+      secure:true
     });
     res.json({
       id: rows.insertId,
@@ -105,7 +105,7 @@ export const loginUser = async(req,res) => {
 
     const token= await createToken({id: rows[0].id});
     res.cookie('token', token,{
-      SameSite: 'None',
+      sameSite: 'none',
       secure:true
     });
     res.json({
@@ -132,9 +132,7 @@ export const loginUser = async(req,res) => {
 //Cerrar sesion
 export const logoutUser = (req,res)=>{
   res.cookie('token', "", {
-    expires: new Date(0),
-    SameSite: 'None',
-    Secure:true
+    expires: new Date(0)
   })
 
   return res.sendStatus(200);
@@ -269,7 +267,7 @@ export const deleteUser = async (req, res) => {
 //VERIFICAR TOKEN
 export const verificarToken= async(req,res)=>{
   const {token} = req.cookies
-
+    console.log(token)
   jwt.verify(token,'key123',async (err,user)=>{
     if (err) return res.status(401).json({
       message: "No estas Autorizado",

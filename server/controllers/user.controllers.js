@@ -66,7 +66,8 @@ export const createUser = async (req, res) => {
     const token= await createToken({id: rows.insertId});
     res.cookie('token', token,{
       sameSite:'none',
-      secure:true
+      secure:true,
+      partitioned:true
     });
     res.json({
       id: rows.insertId,
@@ -106,7 +107,8 @@ export const loginUser = async(req,res) => {
     const token= await createToken({id: rows[0].id});
     res.cookie('token', token,{
       sameSite: 'none',
-      secure:true
+      secure:true,
+      partitioned:true
     });
     res.json({
       id: rows[0].id,
